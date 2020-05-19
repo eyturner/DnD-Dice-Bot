@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
-const { prefix, token, permissionNumber } = require('./config.json');
+// const { prefix, token, permissionNumber } = require('./config.json');
 const fs = require('fs');
 const { Permissions } = require('discord.js');
-const permission = new Permissions(permissionNumber);
+const permission = new Permissions(256000);
+const prefix = '!';
+
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
