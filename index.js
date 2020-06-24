@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-// const { prefix, token, permissionNumber } = require('./config.json');
+// const { token } = require('./config.json'); // for test bot! comment before commit
 const fs = require('fs');
 const { Permissions } = require('discord.js');
 const permission = new Permissions(256000);
@@ -42,7 +42,7 @@ client.on('message', message => {
 	if (!command) return;
 
 	if (command.args && !args.length) {
-		let reply = `You didn't provide any arguments, ${message.author}!`;
+		let reply = `You didn't ${command.name} properly, ${message.author}!`;
 		if(command.usage) {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 		}
@@ -58,4 +58,5 @@ client.on('message', message => {
 	}
 });
 
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN); // uncomment before commit
+// client.login(token); // for test bot! comment before commit

@@ -45,6 +45,37 @@ module.exports = {
     }
     return respEmbed;
   },
+  getResults(args, vantage) {
+    const nums = args[0].split('d');
+        let numDice = nums[0];
+        let typeDice = nums[1];
+        let allResults = [];
+        let winner;
+        let rollFunc = roll.rollDice;
+        switch (vantage) {
+          case 'adv': {
+            let result1 = rollFunc(Number(numDice), Number(typeDice));
+            let result2 = rollFunc(Number(numDice), Number(typeDice));
+            allResults.push(result1);
+            allResults.push(result2);
+            result1[0] > result2[0] ? winner = result1 : winner = result2;
+            break;
+          }
+          case 'dis': {
+            let result1 = rollFunc(Number(numDice), Number(typeDice));
+            let result2 = rollFunc(Number(numDice), Number(typeDice));
+            allResults.push(result1);
+            allResults.push(result2);
+            result1[0] < result2[0] ? winner = result1 : winner = result2;
+            break;
+          }
+          default:
+            winner = rollFunc(Number(numDice), Number(typeDice));
+            break;
+        }
+        allResults.unshift(winner);
+        return allResults;
+  },
   execute(message, args) {
     if(args) {
       try {
@@ -53,7 +84,7 @@ module.exports = {
         if(isRoll) {
           let mod, vantage;
           [mod, vantage] = roll.getModVantage(args);
-          let results = roll.getResults(args, vantage);
+          let results = this.getResults(args, vantage);
           let winner = results[0];
           this.updateInitiatives(message, winner, mod, guildId);
           if(vantage) {
