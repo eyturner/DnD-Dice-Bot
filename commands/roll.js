@@ -144,7 +144,12 @@ module.exports = {
 	execute(message, args) {
 		if(args) {
       try {
-        let guildID = message.guild.id;
+        let guildID;
+        if(message.channel.type == 'dm') {
+            guildID = null;
+        } else {
+         guildID = message.guild.id;
+        }
         if(args[0] == 'gauss' || args[0] == 'random') {
           this.rollModes[guildID] = args[0];
           message.reply(`The roll mode has been set to ${args[0]}!`);
