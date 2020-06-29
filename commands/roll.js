@@ -23,8 +23,8 @@ module.exports = {
   },
   // Same as roll dice, just using a gaussian distribution.
   rollDiceGauss(numDice, typeDice) {
-    const STDDEV = 5;
-    const MEAN = 10;
+    const STDDEV = 6;
+    const MEAN = 10.5;
     let results = [];
     let sum = 0;
     for(let i = 0; i < numDice; ++i) {
